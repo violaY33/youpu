@@ -1,0 +1,33 @@
+.content {
+  padding: 20px 0 40px;
+  margin-top: 50px;
+}
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.spin-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+a {
+  color: #515a6e;
+}
+
+a:hover {
+  color: #17233d;
+}
