@@ -12,7 +12,7 @@ const related = require('./router/related')
 const cate = require('./router/cate')
 const cates = require('./router/cates')
 
-app.use(express.static('dist'));
+
 
 app.listen(2333)
 app.use(cors())
@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
         msg: '尤谱'
     })
 })
+
+app.use(express.static('dist'))
+app.use(express.static('jsData'))
 
 //路由
 app.use(search)

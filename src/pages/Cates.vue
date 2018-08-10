@@ -20,7 +20,7 @@ export default {
 		}
 	},
 	created() {
-        this.$http.get('http://localhost:8080/static/cates.json').then(res => {
+        this.$http.get('/cates.json').then(res => {
             this.cateData = res.data
         }).catch(err => {
             console.log(err)
