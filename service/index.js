@@ -11,9 +11,10 @@ const page = require('./router/page')
 const related = require('./router/related')
 const cate = require('./router/cate')
 const cates = require('./router/cates')
-const test = require('./router/test')
 
-app.listen(9090)
+app.use(express.static('dist'));
+
+app.listen(2333)
 app.use(cors())
 app.use(bodyParser.urlencoded({
   extended: false
@@ -35,4 +36,3 @@ app.use(page)
 app.use(related)
 app.use(cate)
 app.use(cates)
-app.use(test)

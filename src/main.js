@@ -33,7 +33,7 @@ Vue.component('Spin', Spin)
 Vue.component('BackTop', BackTop)
 
 
-axios.defaults.baseURL = 'http://localhost:9090'
+axios.defaults.baseURL = 'http://localhost:2333'
 Vue.prototype.$http = axios
 Vue.prototype.$Loading = LoadingBar
 Vue.prototype.$IVIEW = {}
