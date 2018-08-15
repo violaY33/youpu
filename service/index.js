@@ -22,12 +22,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(morgan('tiny'))
 
-app.get('/', (req, res) => {
-    res.json({
-        msg: '尤谱'
-    })
-})
-
 app.use(express.static('dist'))
 app.use(express.static('jsData'))
 
