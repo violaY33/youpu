@@ -1,21 +1,15 @@
-# youpu
+# 尤谱网
 
-> A Vue.js project
+Vue + iview + express
 
-## Build Setup
 
-``` bash
-# install dependencies
+## 安装
+
+```
 npm install
 
-# serve with hot reload at localhost:8080
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 预览
+[在线预览](http://116.85.44.206:2345/#/)
