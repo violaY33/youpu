@@ -2,7 +2,7 @@
     <div class="cates">
         <main class="content" ref="content">
             <Row type="flex" justify="center">
-                <Col :lg="20" :sm="22" class="cates-container">
+                <Col :lg="16" :sm="22" class="cates-container">
                 <CateItem v-for="(item, index) in cateData" :cateData="item" :key="'cate-'+index"></CateItem>
                 </Col>
             </Row>
