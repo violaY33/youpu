@@ -18,7 +18,13 @@ import {
   CellGroup,
   Cell,
   Spin,
-  BackTop
+  BackTop,
+  Carousel,
+  CarouselItem,
+  Checkbox,
+  Notice,
+  Message,
+  Modal
 } from 'iview'
 
 Vue.component('Row', Row)
@@ -31,14 +37,29 @@ Vue.component('CellGroup', CellGroup)
 Vue.component('Cell', Cell)
 Vue.component('Spin', Spin)
 Vue.component('BackTop', BackTop)
+Vue.component('Carousel', Carousel)
+Vue.component('CarouselItem', CarouselItem)
+Vue.component('Checkbox', Checkbox)
+Vue.component('Notice', Notice)
+Vue.component('Message', Message)
+Vue.component('Modal', Modal)
 
 
 axios.defaults.baseURL = 'http://localhost:2333'
 Vue.prototype.$http = axios
 Vue.prototype.$Loading = LoadingBar
+Vue.prototype.$Notice = Notice
+Vue.prototype.$Message = Message
 Vue.prototype.$IVIEW = {}
 
+Notice.config({
+  top: 200,
+  duration: 2
+});
+
 Vue.config.productionTip = false
+
+
 
 /* eslint-disable no-new */
 new Vue({
@@ -46,3 +67,5 @@ new Vue({
   router,
   render: h => h(App)
 })
+
+

@@ -4,9 +4,9 @@
             <img :src="cateData.pic">
         </router-link>
         <h2>
-             <router-link :to="'/cate/'+cateData.cate">
+            <router-link :to="'/cate/'+cateData.cate">
                 {{ cateData.title }}
-             </router-link>
+            </router-link>
         </h2>
     </div>
 </template>
@@ -19,30 +19,35 @@ export default {
 </script>
 
 <style scoped>
-    .cate-item {
-        display: inline-block;
-        width: 80px;
-        margin: 10px;
-        text-align: center;
-        overflow: hidden;
-        vertical-align: top;
-    }
+.cate-item {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #e7e7e7;
+  text-align: center;
+  overflow: hidden;
+  vertical-align: top;
+}
 
-    .link {
-        display: block;
-        width: 80px;
-        height: 80px;
-        margin-bottom: 10px;
-        border: 1px solid #e8eaec;
-        border-radius: 50%;
-        overflow: hidden;
-    }
+.link {
+  display: block;
+  width: 117px;
+  height: 117px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+h2 {
+  width: 117px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 </style>
 

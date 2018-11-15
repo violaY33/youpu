@@ -1,22 +1,24 @@
 <template>
 	<div class="details">
 		<main class="post-content">
-			<div class="wrap">
+			<div class="sec-1">
 				<h2>{{ postData.title }}</h2>
+			</div>
+			<div class="sec-2">
 				<h3>♩ 谱子</h3>
 				<img v-for="(item, index) in postData.pics" :src="item" :key="'pic-'+index">
+			</div>
+			<div class="sec-3">
 				<h3 v-if="postData.videos && postData.videos.length > 0">♫ 教学视频</h3>
 				<iframe v-for="(item, index) in postData.videos" :src="item" frameborder="0"></iframe>
 			</div>
-		</main>
-		<div class="related">
-			<div class="wrap">
+			<div class="sec-4 related">
 				<h2>相关推荐</h2>
 				<h3 v-for="(item, index) in relatedData" :key="'related-'+index">
 					<router-link :to="'/details/'+ item.id">{{ item.title }}</router-link>
 				</h3>
 			</div>
-		</div>
+		</main>
 	</div>
 </template>
 
@@ -78,58 +80,39 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 h2 {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 h3 {
-	margin: 10px 0;
+  margin: 10px 0;
+  font-size: 16px;
 }
 
 .post-content {
-	display: flex;
-	justify-content: center;
-	margin-top: 50px;
-	padding: 10px;
-}
-
-.post-content .wrap {
-	width: 860px;
+  width: 860px;
 }
 
 img {
-	width: 100%;
-	margin-bottom: 20px;
-}
-
-img:first-of-type {
-	margin-bottom: 0;
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 iframe {
-	width: 100%;
-	height: 600px;
-	margin-bottom: 20px;
-}
-
-@media screen and (max-width: 768px) {
-	iframe {
-		height: 400px;
-	}
+  display: block;
+  width: 487px;
+  height: 320px;
+  margin: 0 auto 20px;
 }
 
 .related {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 60px;
-	padding: 0 10px;
-}
-
-.related .wrap {
-	width: 860px;
-	margin-top: 10px;
-	border-top: 1px dashed #e8eaec;
+	border-top: 1px dashed #e7e7e7;
+	padding-top: 10px;
 }
 </style>
 

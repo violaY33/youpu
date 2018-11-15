@@ -1,22 +1,21 @@
 <template>
 	<div class="cate">
 		<main class="content" ref="content">
-			<Row type="flex" justify="center">
-				<Col span="20" class="posts-container">
+			<div class="sec-1">
+				<h2>合集：{{ cateName[cateId] }}</h2>
+			</div>
+			<div class="sec-2 expand-width clearfix">
 				<PostCard v-for="(item, index) in postData" :postData="item" :key="'post-'+index"></PostCard>
-				</Col>
-			</Row>
-			<Row type="flex" justify="center">
-				<Col span="24" style="text-align: center">
-				<p v-show="isLoad">
-					正在努力加载 (o゜▽゜)o☆
+				<div v-show="isLoad" class="tip-load tip-loading fl">
+					正在玩命加载中 <br>(o゜▽゜)o☆
 					<span class="spin-container">
-						<Spin size="small"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
 					</span>
-				</p>
-				<p v-show="isEnd">没有更多啦 ≧ ﹏ ≦</p>
-				</Col>
-			</Row>
+				</div>
+				<div v-show="isEnd" class="tip-load tip-no-more fl">没有更多啦 <br> ≧ ﹏ ≦</div>
+			</div>
 		</main>
 	</div>
 </template>
@@ -32,6 +31,8 @@ export default {
 		this.cateId = this.$route.params.cateSubId
 			? this.$route.params.cateId + '/' + this.$route.params.cateSubId
 			: this.$route.params.cateId
+
+		console.log(this.cateId)
 	},
 	mounted() {
 		this.getData()
@@ -50,6 +51,34 @@ export default {
 			postData: [],
 			isEnd: false,
 			isLoad: false,
+			cateName: {
+				"ty": "桃子鱼仔教室",
+				"jc/nm": "柠檬音乐",
+				"qtyy": "趣弹音乐",
+				"pb": "白熊音乐",
+				"jc/xy": "小鱼吉他屋",
+				"jc/masusu": "马叔叔教学",
+				"dfs": "大夫山Ukulele",
+				"ykbb": "尤克宝贝",
+				"fq": "番茄尤克里里",
+				"jc/sir": "子熏乐器张Sir",
+				"tanker": "弹客Tanker",
+				"xx": "星弦音乐教室",
+				"sy": "心忆尤克里里",
+				"zm": "追梦音乐",
+				"xxf": "小小凤",
+				"jc/zuolun": "左轮吉他",
+				"sasa": "小Sa神",
+				"mk": "摩卡音乐",
+				"ju": "加U音乐",
+				"ysyh": "一树一花",
+				"jieu": "解U尤克里里",
+				"xyf": "弦音坊尤克里里",
+				"zy": "子烨尤克里里",
+				"sanni": "桑尼Ukulele",
+				"cjy": "陈建廷入门24课",
+				"zst": "张松涛"
+			}
 		}
 	},
 	components: {
@@ -121,6 +150,7 @@ export default {
 						}
 					})
 					.catch(err => {
+						this.isLoad = false;
 						console.log(err)
 						reject()
 					})

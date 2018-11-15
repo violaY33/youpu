@@ -1,22 +1,21 @@
 <template>
-	<div class="home">
+	<div class="search">
 		<main class="content" ref="content">
-			<Row type="flex" justify="center">
-				<Col span="20" class="posts-container">
+			<div class="sec-1">
+				<h2>“{{ kw }}”的搜索结果</h2>
+			</div>
+			<div class="sec-2 expand-width clearfix">
 				<PostCard v-for="(item, index) in postData" :postData="item" :key="'post-'+index"></PostCard>
-				</Col>
-			</Row>
-			<Row type="flex" justify="center">
-				<Col span="24" style="text-align: center">
-				<p v-show="isLoad">
-					正在努力加载 (o゜▽゜)o☆
+				<div v-show="isLoad" class="tip-load tip-loading fl">
+					正在玩命加载中<br/>(o゜▽゜)o☆
 					<span class="spin-container">
-						<Spin size="small"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
 					</span>
-				</p>
-				<p v-show="isEnd">没有更多啦 ≧ ﹏ ≦</p>
-				</Col>
-			</Row>
+				</div>
+				<div v-show="isEnd" class="tip-load tip-no-more fl">没有更多啦<br/>≧ ﹏ ≦</div>
+			</div>
 		</main>
 	</div>
 </template>
@@ -119,6 +118,7 @@ export default {
 						}
 					})
 					.catch(err => {
+						this.isLoad = false;
 						console.log(err)
 						reject()
 					})
@@ -129,4 +129,7 @@ export default {
 </script>
 
 <style scoped>
+.sec-2 {
+  margin-right: -10px;
+}
 </style>

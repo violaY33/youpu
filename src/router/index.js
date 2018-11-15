@@ -5,6 +5,7 @@ import Details from '@/pages/Details'
 import Cate from '@/pages/Cate'
 import Search from '@/pages/Search'
 import Cates from '@/pages/Cates'
+import Collection from '@/pages/Collection'
 
 Vue.use(Router)
 
@@ -38,6 +39,12 @@ export default new Router({
       path: '/cates',
       name: 'cates',
       component: Cates
+    },
+    {
+      path: '/collection',
+      name: 'collection',
+      component: Collection
     }
+
   ]
 })

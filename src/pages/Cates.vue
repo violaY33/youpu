@@ -1,11 +1,12 @@
 <template>
     <div class="cates">
-        <main class="content" ref="content">
-            <Row type="flex" justify="center">
-                <Col :lg="16" :sm="22" class="cates-container">
+        <main>
+            <div class="sec-1">
+                <h2>所有合集</h2>
+            </div>
+            <div class="sec-2 clearfix">
                 <CateItem v-for="(item, index) in cateData" :cateData="item" :key="'cate-'+index"></CateItem>
-                </Col>
-            </Row>
+            </div>
         </main>
     </div>
 </template>

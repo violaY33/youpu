@@ -1,24 +1,38 @@
 <template>
 	<div class="home">
-		<main class="content" ref="content">
-			<Row type="flex" justify="center">
-				<Col span="20" class="posts-container">
+		<main class="main" ref="content">
+			<div class="sec-1">
+				<Carousel autoplay v-model="carousel" loop class="carousel">
+					<CarouselItem class="carousel-item">
+						<router-link to="">
+							<img class="pic" src="http://www.tanukulele.com/wp-content/uploads/2018/08/yh-980x370.jpg">
+						</router-link>
+					</CarouselItem>
+					<CarouselItem class="carousel-item">
+						<router-link to="">
+							<img class="pic" src="http://www.tanukulele.com/wp-content/uploads/2018/06/uma-980x370.jpg">
+						</router-link>
+					</CarouselItem>
+					<CarouselItem class="carousel-item">
+						<router-link to="">
+							<img class="pic" src="http://www.tanukulele.com/wp-content/uploads/2017/03/25D-980x370.jpg">
+						</router-link>
+					</CarouselItem>
+				</Carousel>
+			</div>
+			<div class="sec-2 expand-width clearfix">
 				<PostCard v-for="(item, index) in postData" :postData="item" :key="'post-'+index"></PostCard>
-				</Col>
-			</Row>
-			<Row type="flex" justify="center">
-				<Col span="24" style="text-align: center">
-				<p v-show="isLoad">
-					正在努力加载 (o゜▽゜)o☆
+				<div v-show="isLoad" class="tip-load tip-loading fl">
+					正在玩命加载中<br/>(o゜▽゜)o☆
 					<span class="spin-container">
-						<Spin size="small"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
+						<Spin size="small" class="spin-item"></Spin>
 					</span>
-				</p>
-				<p v-show="isEnd">没有更多啦 ≧ ﹏ ≦</p>
-				</Col>
-			</Row>
+				</div>
+				<div v-show="isEnd" class="tip-load tip-no-more fl">没有更多啦<br/>≧ ﹏ ≦</div>
+			</div>
 		</main>
-
 	</div>
 </template>
 
@@ -27,16 +41,21 @@ import PostCard from './../components/PostCard.vue'
 import infiniteScroll from './../assets/js/infinite-scroll.js'
 
 export default {
-	name: 'Home',
+	name: 'home',
 	created() {
 		this.$Loading.start()
+		if (!localStorage.collection) {
+			localStorage.collection = JSON.stringify([])
+		}
 	},
 	mounted() {
 		this.getData()
 			.then(res => {
 				this.$Loading.finish()
+				this.isLoad = false;
 			})
 			.catch(err => {
+				this.isLoad = false;
 				this.$Loading.error()
 			})
 
@@ -44,10 +63,11 @@ export default {
 	},
 	data() {
 		return {
+			carousel: 0,
 			currentPage: 1,
 			postData: [],
 			isEnd: false,
-			isLoad: false,
+			isLoad: true,
 		}
 	},
 	components: {
@@ -61,6 +81,9 @@ export default {
 		},
 	},
 	methods: {
+		log(e) {
+			console.log(e.target)
+		},
 		getData() {
 			return new Promise((resolve, reject) => {
 				this.$http
@@ -102,13 +125,29 @@ export default {
 					})
 					.catch(err => {
 						console.log(err)
+						this.isLoad = false;
 						reject()
 					})
 			})
 		},
 	},
 }
+
+
+
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.carousel {
+  height: 370px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .carousel-item {
+    .pic {
+      min-width: 100%;
+      height: 100%;
+    }
+  }
+}
 </style>
