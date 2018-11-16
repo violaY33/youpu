@@ -2,7 +2,7 @@
   <div class="post">
     <div class="thumbnail">
       <router-link :to="'/details/'+ postData.id">
-        <img :src="postData.thumbnail" :alt="postData.title">
+        <img :src="postData.thumbnail" :alt="postData.title" @error="imgError">
       </router-link>
     </div>
     <div class="title">
@@ -12,7 +12,7 @@
     </div>
     <div class="info clearfix">
       <span class="category fl">
-        <router-link :to="'/cate/'+postData.cate">
+        <router-link :to="'/cate/'+ postData.cate">
           <Icon type="ios-list-box-outline" />{{ postData.source }}</router-link>
       </span>
       <span class="collection fr" @click="handleCollect">
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       starIcon: 'md-star-outline',
-      hasCollected: false
+      hasCollected: false,
     }
   },
   mounted() {
@@ -49,6 +49,10 @@ export default {
 
   },
   methods: {
+    imgError(e) {
+      this.postData.thumbnail = 'http://iph.href.lu/235x200?text=%20&fg=f8f8f9&bg=f8f8f9';
+      e.target.onerror = null;
+    },
     handleCollect() {
       //如果没收藏
       if (!this.hasCollected) {
@@ -110,15 +114,16 @@ export default {
 }
 
 .thumbnail {
+  border-bottom: 1px dashed #e8eaec;
   a {
     display: block;
-    width: 300px;
+    width: 100%;
     height: 200px;
   }
 
   img {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     object-fit: cover;
   }
 }
@@ -158,7 +163,7 @@ export default {
     cursor: pointer;
 
     & .collected {
-      color: yellow;
+      color: #F3A535;
     }
   }
 }

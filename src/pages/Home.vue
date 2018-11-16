@@ -81,9 +81,6 @@ export default {
 		},
 	},
 	methods: {
-		log(e) {
-			console.log(e.target)
-		},
 		getData() {
 			return new Promise((resolve, reject) => {
 				this.$http

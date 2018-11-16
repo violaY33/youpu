@@ -8,13 +8,13 @@
 						<Checkbox :value="checkAll" @click.prevent.native="handleCheckAll">全选</Checkbox>
 						<Button class="btn btn-admin fr" type="error" @click="handleDelete">删除</Button>
 					</div>
-					<Button class="btn btn-admin" @click="handleAdmin">管理</Button>
+					<Button class="btn btn-admin" @click="handleAdmin">{{ adminText }}</Button>
 				</div>
 			</div>
 			<div class="sec-2 expand-width clearfix">
 				<ul class="collection-list">
 					<li class="collection-item clearfix" v-for="(item, index) in collectionData">
-						<Checkbox class="fl" :value="checkGroup[index]" @click.prevent.native="handleCheck(index, item.id)" />
+						<Checkbox class="fl" :class="showAdmin ? '' : 'hide'" :value="checkGroup[index]" @click.prevent.native="handleCheck(index, item.id)" />
 						<h3 class="title fl">
 							<router-link :to="'/details/' + item.id">{{ item.title }}</router-link>
 						</h3>
@@ -66,7 +66,8 @@ export default {
 			checkedId: [], //选中值的id
 			collectionData: [], //收藏夹数据
 			showDelModal: false,
-			showAdmin: false
+			showAdmin: false,
+			adminText: '管理'
 		}
 	},
 	components: {
@@ -95,12 +96,12 @@ export default {
 	methods: {
 		handleAdmin() {
 			if (this.collectionData.length === 0) {
-				console.log(this.collectionData)
 				this.$Notice.error({
 					title: '暂无可以管理的数据哦 ＞︿＜',
 				});
 			} else {
 				this.showAdmin = !this.showAdmin;
+				this.showAdmin ? this.adminText = '完成' : this.adminText = '管理';
 			}
 		},
 		handleCheck(index, id) {
@@ -138,8 +139,6 @@ export default {
 			} else {
 				this.showDelModal = true;
 			}
-			console.log(JSON.parse(localStorage.collection))
-
 		},
 		delAll() {
 			this.showDelModal = false;

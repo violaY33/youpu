@@ -31,8 +31,6 @@ export default {
 		this.cateId = this.$route.params.cateSubId
 			? this.$route.params.cateId + '/' + this.$route.params.cateSubId
 			: this.$route.params.cateId
-
-		console.log(this.cateId)
 	},
 	mounted() {
 		this.getData()
