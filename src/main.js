@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import 'iview/dist/styles/iview.css'
+import './../src/assets/css/iview-theme.less'
 import './../src/assets/css/coverIview.css'
 import './../src/assets/css/normal.css'
 import {

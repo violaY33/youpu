@@ -18,7 +18,7 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
     }
   }
 
@@ -37,7 +37,8 @@ exports.cssLoaders = function (options) {
       loaders.push({
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+          sourceMap: options.sourceMap,
+          javascriptEnabled: true // <- enable this option
         })
       })
     }
