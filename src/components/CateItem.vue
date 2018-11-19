@@ -23,7 +23,7 @@ export default {
   display: inline-block;
   margin: 10px;
   padding: 10px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #e8eaec;
   text-align: center;
   overflow: hidden;
   vertical-align: top;

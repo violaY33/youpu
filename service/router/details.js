@@ -3,6 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const cheerio = require('cheerio')
 const isVideo = require('./../utils/isVideo')
+const getCate = require('./../utils/getCate')
 
 router.post('/details', (req, res) => {
     const postId = req.body.postId 
@@ -13,6 +14,8 @@ router.post('/details', (req, res) => {
         const $ = cheerio.load(html)
 
         let title = ''
+        let cate = ''
+        let source = ''
         const videos = []
         const pics = []
 
@@ -22,7 +25,7 @@ router.post('/details', (req, res) => {
             isVideo(iframeLink) ? videos.push(iframeLink) : ''
         })
 
-        $('#post_content .alignnone').each((index, item) => {
+        $('#post_content [data-lightbox] img').each((index, item) => {
             const pic = $(item).attr('src')
             pics.push(pic)
         })
@@ -33,11 +36,20 @@ router.post('/details', (req, res) => {
             
         })
 
+        $('.article_info .info_category a').each((index, item) => {
+            cate = getCate($(item).attr('href'))
+            source = $(item).text()
+            
+        })
+
 
         res.send({
             title,
             videos,
             pics,
+            id: postId,
+            cate,
+            source
         })
 
 

@@ -13,12 +13,15 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        title: '尤谱网'
+      }
     },
     {
       path: '/details/:id',
       name: 'details',
-      component: Details
+      component: Details,
     },
     {
       path: '/cate/:cateId',
@@ -43,7 +46,10 @@ export default new Router({
     {
       path: '/collection',
       name: 'collection',
-      component: Collection
+      component: Collection,
+      meta: {
+        title: '我的收藏'
+      }
     }
 
   ]

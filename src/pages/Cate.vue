@@ -6,15 +6,7 @@
 			</div>
 			<div class="sec-2 expand-width clearfix">
 				<PostCard v-for="(item, index) in postData" :postData="item" :key="'post-'+index"></PostCard>
-				<div v-show="isLoad" class="tip-load tip-loading fl">
-					正在玩命加载中 <br>(o゜▽゜)o☆
-					<span class="spin-container">
-						<Spin size="small" class="spin-item"></Spin>
-						<Spin size="small" class="spin-item"></Spin>
-						<Spin size="small" class="spin-item"></Spin>
-					</span>
-				</div>
-				<div v-show="isEnd" class="tip-load tip-no-more fl">没有更多啦 <br> ≧ ﹏ ≦</div>
+				<Loading :isLoading="isLoading" :isEnd="isEnd"></Loading>
 			</div>
 		</main>
 	</div>
@@ -22,6 +14,7 @@
 
 <script>
 import PostCard from './../components/PostCard.vue'
+import Loading from './../components/Loading.vue'
 import infiniteScroll from './../assets/js/infinite-scroll.js'
 
 export default {
@@ -48,7 +41,7 @@ export default {
 			currentPage: 1,
 			postData: [],
 			isEnd: false,
-			isLoad: false,
+			isLoading: false,
 			cateName: {
 				"ty": "桃子鱼仔教室",
 				"jc/nm": "柠檬音乐",
@@ -81,6 +74,7 @@ export default {
 	},
 	components: {
 		PostCard,
+		Loading
 	},
 	watch: {
 		$route(to, from) {
@@ -126,7 +120,7 @@ export default {
 
 		getMoreData() {
 			return new Promise((resolve, reject) => {
-				this.isLoad = true
+				this.isLoading = true
 				this.$http
 					.post('/cate', {
 						cate: this.cateId,
@@ -138,7 +132,7 @@ export default {
 							resolve({
 								isEnd: true,
 							})
-							this.isLoad = false
+							this.isLoading = false
 						} else {
 							this.currentPage++
 							this.postData.push(...res.data)
@@ -148,7 +142,7 @@ export default {
 						}
 					})
 					.catch(err => {
-						this.isLoad = false;
+						this.isLoading = false;
 						console.log(err)
 						reject()
 					})

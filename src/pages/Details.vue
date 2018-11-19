@@ -1,8 +1,9 @@
 <template>
 	<div class="details">
 		<main class="post-content">
-			<div class="sec-1">
-				<h2>{{ postData.title }}</h2>
+			<div class="sec-1 clearfix">
+				<h2 class="fl">{{ postData.title }}</h2>
+				<Button class="btn-collection fr" size="small" type="default" @click="handleCollection">{{ hasCollected ? '已收藏' : '加入收藏' }}</Button>
 			</div>
 			<div class="sec-2">
 				<h3>♩ 谱子</h3>
@@ -30,12 +31,23 @@ export default {
 	},
 	mounted() {
 		this.getData(this.postId)
+		const collection = JSON.parse(localStorage.collection);
+		if (collection.length > 0) {
+			for (let i = 0; i < collection.length; i++) {
+				if (collection[i].id === this.postId) {
+					this.hasCollected = true;
+
+					break;
+				}
+			}
+		}
 	},
 	data() {
 		return {
 			postId: this.$route.params.id,
 			postData: {},
 			relatedData: {},
+			hasCollected: false,
 		}
 	},
 	components: {
@@ -49,6 +61,7 @@ export default {
 	},
 	methods: {
 		getData(postId) {
+			const self = this;
 			this.$http
 				.post('/details', {
 					postId,
@@ -58,6 +71,8 @@ export default {
 					this.$Loading.finish()
 					document.body.scrollTop = 0
 					document.documentElement.scrollTop = 0
+					document.title = self.postData.title
+
 				})
 				.catch(err => {
 					this.$Loading.error()
@@ -76,15 +91,42 @@ export default {
 					console.log(err)
 				})
 		},
+		handleCollection() {
+			this.hasCollected = !this.hasCollected;
+			const collection = JSON.parse(localStorage.collection);
+			if (this.hasCollected) {
+				collection.push({
+					cate: this.postData.cate,
+					id: this.postData.id,
+					source: this.postData.source,
+					title: this.postData.title
+				});
+				localStorage.collection = JSON.stringify(collection);
+				this.$Notice.success({
+					title: '已添加到收藏夹O(∩_∩)O',
+				});
+			} else {
+				let curIdx;
+
+				for (let i = 0; i < collection.length; i++) {
+					if (collection[i].id === this.postData.id) {
+						curIdx = i;
+						break;
+					}
+				}
+
+				collection.splice(curIdx, 1);
+				localStorage.collection = JSON.stringify(collection);
+				this.$Notice.success({
+					title: '已为您取消收藏>"<',
+				});
+			}
+		}
 	},
 }
 </script>
 
 <style lang="less" scoped>
-h2 {
-  margin: 10px 0;
-}
-
 h3 {
   margin: 10px 0;
   font-size: 16px;
@@ -111,8 +153,15 @@ iframe {
 }
 
 .related {
-	border-top: 1px dashed #e7e7e7;
-	padding-top: 10px;
+  border-top: 1px dashed #e8eaec;
+  padding-top: 10px;
+}
+
+.btn-collection {
+  height: 27px;
+  line-height: 27px;
+  padding: 0 20px;
+  vertical-align: baseline;
 }
 </style>
 

@@ -1,18 +1,18 @@
 <template>
   <div class="post">
     <div class="thumbnail">
-      <router-link :to="'/details/'+ postData.id">
+      <router-link :to="'/details/'+ postData.id"  target="_blank">
         <img :src="postData.thumbnail" :alt="postData.title" @error="imgError">
       </router-link>
     </div>
     <div class="title">
-      <router-link :to="'/details/'+ postData.id">
+      <router-link :to="'/details/'+ postData.id"  target="_blank">
         <h2>{{ postData.title }}</h2>
       </router-link>
     </div>
     <div class="info clearfix">
       <span class="category fl">
-        <router-link :to="'/cate/'+ postData.cate">
+        <router-link :to="'/cate/'+ postData.cate"  target="_blank">
           <Icon type="ios-list-box-outline" />{{ postData.source }}</router-link>
       </span>
       <span class="collection fr" @click="handleCollect">
@@ -77,7 +77,7 @@ export default {
 
         const collection = JSON.parse(localStorage.collection);
 
-        //找出index 并删除
+
         let curIdx;
 
         for (let i = 0; i < collection.length; i++) {

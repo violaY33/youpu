@@ -22,15 +22,7 @@
 			</div>
 			<div class="sec-2 expand-width clearfix">
 				<PostCard v-for="(item, index) in postData" :postData="item" :key="'post-'+index"></PostCard>
-				<div v-show="isLoad" class="tip-load tip-loading fl">
-					正在玩命加载中<br/>(o゜▽゜)o☆
-					<span class="spin-container">
-						<Spin size="small" class="spin-item"></Spin>
-						<Spin size="small" class="spin-item"></Spin>
-						<Spin size="small" class="spin-item"></Spin>
-					</span>
-				</div>
-				<div v-show="isEnd" class="tip-load tip-no-more fl">没有更多啦<br/>≧ ﹏ ≦</div>
+				<Loading :isLoading="isLoading" :isEnd="isEnd"></Loading>
 			</div>
 		</main>
 	</div>
@@ -38,6 +30,7 @@
 
 <script>
 import PostCard from './../components/PostCard.vue'
+import Loading from './../components/Loading.vue'
 import infiniteScroll from './../assets/js/infinite-scroll.js'
 
 export default {
@@ -52,10 +45,10 @@ export default {
 		this.getData()
 			.then(res => {
 				this.$Loading.finish()
-				this.isLoad = false;
+				this.isLoading = false;
 			})
 			.catch(err => {
-				this.isLoad = false;
+				this.isLoading = false;
 				this.$Loading.error()
 			})
 
@@ -67,11 +60,12 @@ export default {
 			currentPage: 1,
 			postData: [],
 			isEnd: false,
-			isLoad: true,
+			isLoading: true,
 		}
 	},
 	components: {
 		PostCard,
+		Loading
 	},
 	watch: {
 		isEnd() {
@@ -100,7 +94,7 @@ export default {
 		},
 		getMoreData() {
 			return new Promise((resolve, reject) => {
-				this.isLoad = true
+				this.isLoading = true
 				this.$http
 					.post('/page', {
 						currentPage: this.currentPage,
@@ -111,7 +105,7 @@ export default {
 							resolve({
 								isEnd: true,
 							})
-							this.isLoad = false
+							this.isLoading = false
 						} else {
 							this.currentPage++
 							this.postData.push(...res.data)
@@ -122,7 +116,7 @@ export default {
 					})
 					.catch(err => {
 						console.log(err)
-						this.isLoad = false;
+						this.isLoading = false;
 						reject()
 					})
 			})

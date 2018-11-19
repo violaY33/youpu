@@ -37,25 +37,3 @@ main {
 .hide {
   display: none !important;
 }
-.tip-load {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 280px;
-  margin: 0 10px 10px 0;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 18px;
-  overflow: hidden;
-}
-.tip-load.tip-loading {
-  width: 237px;
-}
-.tip-load.tip-no-more {
-  width: 100%;
-}
-.tip-load .spin-container {
-  display: flex;
-  margin-top: 10px;
-}

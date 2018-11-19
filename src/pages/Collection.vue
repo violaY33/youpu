@@ -11,7 +11,7 @@
 					<Button class="btn btn-admin" @click="handleAdmin">{{ adminText }}</Button>
 				</div>
 			</div>
-			<div class="sec-2 expand-width clearfix">
+			<div class="sec-2 clearfix">
 				<ul class="collection-list">
 					<li class="collection-item clearfix" v-for="(item, index) in collectionData">
 						<Checkbox class="fl" :class="showAdmin ? '' : 'hide'" :value="checkGroup[index]" @click.prevent.native="handleCheck(index, item.id)" />
@@ -62,9 +62,9 @@ export default {
 			kw: '',
 			currentPage: 1,
 			checkAll: false,
-			checkGroup: [], //布尔值: 是否选中
-			checkedId: [], //选中值的id
-			collectionData: [], //收藏夹数据
+			checkGroup: [], 
+			checkedId: [], 
+			collectionData: [], 
 			showDelModal: false,
 			showAdmin: false,
 			adminText: '管理'
@@ -160,6 +160,7 @@ export default {
 
 			if (this.collectionData.length === 0) {
 				this.showAdmin = false;
+				this.adminText = '管理';
 			}
 
 			this.$Notice.success({
@@ -184,7 +185,8 @@ export default {
   }
   .btn {
     height: 27px;
-    padding: 0 20px;
+	padding: 0 20px;
+	margin-right: 0;
     font-size: 14px;
     line-height: 25px;
     letter-spacing: 2px;
@@ -192,13 +194,12 @@ export default {
 }
 
 .sec-2 {
-  margin-right: -10px;
 
   .collection-list {
-    border-top: 1px dashed #e7e7e7;
+    border-top: 1px dashed #e8eaec;
     .collection-item {
       list-style: none;
-      border-bottom: 1px dashed #e7e7e7;
+      border-bottom: 1px dashed #e8eaec;
       .title {
         font-size: 16px;
       }

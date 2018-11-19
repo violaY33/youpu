@@ -7,7 +7,8 @@ const getCate = require('./../utils/getCate')
 
 router.post('/page', (req, res) => {
   const page = req.body.currentPage
-  const url = encodeURI(`http://www.tanukulele.com/page/${page}`)
+  const url = page === 1 ? encodeURI(`http://www.tanukulele.com/`)
+  : encodeURI(`http://www.tanukulele.com/page/${page}`)
 
   axios.get(url).then(response => {
     const html = response.data

@@ -59,6 +59,13 @@ Notice.config({
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
+
 
 
 /* eslint-disable no-new */
@@ -67,5 +74,3 @@ new Vue({
   router,
   render: h => h(App)
 })
-
-

@@ -6,7 +6,7 @@
 					<router-link to="/">尤谱网</router-link>
 				</h1>
 			</div>
-			<div class="collection fr"><router-link to="collection">我的收藏</router-link></div>
+			<div class="collection fr"><router-link to="/collection">我的收藏</router-link></div>
 			<div class="cates fr">
 				<ul class="nav">
 					<li class="cates-item">
@@ -70,7 +70,7 @@ export default {
   top: 0;
   width: 100%;
   line-height: 50px;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e8eaec;
   background-color: #fff;
 }
 
